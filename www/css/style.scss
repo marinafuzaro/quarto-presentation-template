@@ -1,0 +1,202 @@
+/*-- scss:defaults --*/
+
+$white: #ffffff;
+$black: #000000;
+$gray: #444444;
+$light-gray: #fafafa;
+$highlight: #669bbc;
+$rule: 7px solid $black;
+
+$font: "Space Grotesk", sans-serif;
+$font-family-sans-serif: $font;
+
+$body-bg: $white;
+$body-color: $gray;
+$link-color: $black;
+$link-color-hover: $black;
+$selection-bg: #e6e6e6;
+$selection-color: $black;
+
+$presentation-heading-font: $font;
+$presentation-heading-color: $black;
+$presentation-heading-font-weight: 700;
+$presentation-heading-line-height: 1.1;
+$presentation-h2-font-size: 1.3em;
+$presentation-h3-font-size: 1em;
+$presentation-font-size-root: 36px;
+$presentation-line-height: 1.25;
+
+/*-- scss:rules --*/
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../../../../../www/fonts/SpaceGrotesk-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 300 700;
+}
+
+.reveal {
+  text-align: left;
+
+  /* vertically center the active slide */
+  .slides > section.present {
+    height: 100%;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* breathing room below slide titles and kickers */
+  h2 { margin-bottom: 1em; }
+  h3 { margin-bottom: 0.1em; }
+
+  /* black bullets */
+  li::marker { color: $black; }
+
+  /* highlighter: hand-drawn marker look, only during its own click */
+  .fragment.highlight {
+    opacity: 1;
+    visibility: inherit;
+    margin: 0 -0.4em;
+    padding: 0.1em 0.4em;
+    border-radius: 0.8em 0.3em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    background-image: linear-gradient(rgba($highlight, 0.4), rgba($highlight, 0.4));
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+
+    /* stroke grows left to right on its click */
+    &.current-fragment {
+      background-size: 100% 100%;
+      transition: background-size 0.5s ease-out;
+    }
+  }
+
+  /* img: no margin + rounded corners */
+  img {
+    margin: 0;
+    border-radius: 0.5em;
+  }
+
+  /* equal columns with a gap; boxes span the full column */
+  .columns {
+    display: flex;
+    gap: 1.5em;
+  }
+
+  .columns > .column {
+    flex: 1;
+
+    > .box { margin-inline: 0 !important; }
+  }
+
+  /* blockquote specs */
+  blockquote {
+    width: auto;
+    margin: 0.5em 0;
+    padding: 0.5em 0.6em;
+    background: $light-gray;
+    border-left: $rule;
+    border-top-right-radius: 0.7em;
+    border-top-left-radius: 0.3em;
+    border-bottom-right-radius: 0.3em;
+    border-bottom-left-radius: 0.3em;
+    box-shadow: none;
+    color: $gray;
+    font-style: normal;
+    font-size: 0.85em;
+    line-height: 1.32;
+
+    p { margin: 0; }
+  }
+}
+
+/* section: cover */
+
+.cover {
+  /* logo on top; footer at the bottom */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* top logo specs */
+  .event-logo { 
+    height: 1.5em; 
+  }
+
+  /* main title specs */
+  .title {
+    display: block;
+    font-size: 1.85em;
+    font-weight: 700;
+    line-height: 1;
+    color: $black;
+  }
+
+  /* subtitle specs */
+  .subtitle { 
+    color: $gray; 
+  }
+
+  /* footer left: authors; right: bottom logos */
+  .cover-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1em;
+  }
+
+  /* authors names specs */
+  .authors {
+    font-size: 0.6em;
+    color: $gray;
+
+    .name {
+      display: block;
+      font-weight: 500;
+      color: $black;
+    }
+  }
+
+  /* bottom logos side by side, any count; wraps when too many */
+  .logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 1em;
+    min-width: 0;
+
+    /* flatten pandoc wrappers so every img is a flex item */
+    p, figure, .quarto-figure, .quarto-float { display: contents; }
+    figcaption { display: none; }
+
+    img { height: 3em; }
+  }
+}
+
+/* section: text blocks */
+
+/* box with a black line on top */
+.box {
+  padding-top: 0.5em;
+  border-top: $rule;
+
+  /* tighter quote inside boxes */
+  blockquote { padding: 0.4em 0.5em; }
+}
+
+/* smaller supporting line below the main text */
+.detail {
+  display: block;
+  font-size: 0.75em;
+}
+
+/* bibliographic reference */
+.source {
+  display: block;
+  margin-top: 0.45em;
+  font-size: 0.5em;
+  font-style: italic;
+}
